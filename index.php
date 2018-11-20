@@ -3,17 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Google Clone</title>
+    <link rel="stylesheet" href="Assets/CSS/style.css">
 </head>
 <body>
+
+   <div class="wrapper indexPage">
+   
     <div class="mainSection">
         <div class="logoContainer">
-            <img src="https://www.google.hr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" alt="">
+            <img src="Assets/Images/Looola%20logo.png" alt="">
         </div>
+        
         <div class="searchContainer">
-            <input class="searchBox" type="text" name="term">
-            <input class="searchButton" type="submit" value="Search">
+           <form action="search.php" method="GET">
+                <input class="searchBox" type="text" name="term">
+                <input class="searchButton" type="submit" value="Search">
+            </form>
         </div>
     </div>
-
+    
+    </div>
 </body>
 </html>

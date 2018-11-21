@@ -21,10 +21,14 @@ class DomDocumentParser{
         return $this->doc->getElementsByTagName("a");
     }
     
-    public function getTitletags(){
-        return $this->doc->getElementsByTagName("title");
-        
+    public function getTitleTags(){
+        return $this->doc->getElementsByTagName("title");  
     }
+    
+    public function getMetaTags(){
+        return $this->doc->getElementsByTagName("meta"); 
+    }
+    
 }
 
 ?>

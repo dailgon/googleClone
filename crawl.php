@@ -4,6 +4,7 @@ include("classes/DomDocumentParser.php");
 
 $alreadyCrawled = array();
 $crawling = array();
+$alreadyFoundImages = array();
 
 function insertLink($url, $title, $description, $keywords) {
 	global $con;
@@ -17,6 +18,31 @@ function insertLink($url, $title, $description, $keywords) {
 	$query->bindParam(":keywords", $keywords);
 
 	return $query->execute();
+}
+
+function insertImage($url, $src, $alt, $title) {
+	global $con;
+
+	$query = $con->prepare("INSERT INTO images(site_url, image_url, alt, title)
+							VALUES(:site_url, :image_url, :alt, :title)");
+
+	$query->bindParam(":site_url", $url);
+	$query->bindParam(":image_url", $src);
+	$query->bindParam(":alt", $alt);
+	$query->bindParam(":title", $title);
+
+	return $query->execute();
+}
+
+function linkExists($url) {
+	global $con;
+
+	$query = $con->prepare("SELECT * FROM sites WHERE url = :url");
+
+	$query->bindParam(":url", $url);
+
+	$query->execute();
+    return $query->rowCount() != 0;
 }
 
 function createLink($src, $url) {
@@ -45,6 +71,8 @@ function createLink($src, $url) {
 
 function getDetails($url) {
 
+    global $alreadyFoundImages;
+    
 	$parser = new DomDocumentParser($url);
 
 	$titleArray = $parser->getTitleTags();
@@ -79,8 +107,33 @@ function getDetails($url) {
 	$description = str_replace("\n", "", $description);
 	$keywords = str_replace("\n", "", $keywords);
 
-
-	insertLink($url, $title, $description, $keywords);
+    if(linkExists($url)){
+        echo "$url already exists";
+    }
+	elseif(insertLink($url, $title, $description, $keywords)){
+      echo "SUCCESS on $url";
+  }
+    else{
+        echo "ERROR, failed to insert $url";
+    }
+    
+    $imageArray = $parser->getImages();
+    foreach($imageArray as $image){
+        $src = $image->getAttribute("src");
+        $alt = $image->getAttribute("alt");
+        $title = $image->getAttribute("title");
+        
+        if(!$title && !$alt)
+            continue;
+        
+        $src = createLink($src, $url);
+        
+        if(!in_array($src, $alreadyFoundImages)){
+            $alreadyFoundImages[] = $src;
+            
+            insertImage($url, $src, $alt, $title);
+        }
+    }
 
 }
 
@@ -113,8 +166,6 @@ function followLinks($url) {
 
 			getDetails($href);
 		}
-		else return;
-
 
 	}
 
@@ -125,7 +176,12 @@ function followLinks($url) {
 	}
 
 }
+$urlArray = array (
+                "https://www.hrvatskitelekom.hr");
+foreach($urlArray as $urlElement){
 
-$startUrl = "http://www.bbc.com";
-followLinks($startUrl);
+    $startUrl = $urlElement;
+    followLinks($startUrl);
+}
+
 ?>

@@ -15,8 +15,8 @@
    
     <div class="mainSection">
         <div class="logoContainer">
-            <img src="Assets/Images/Looola%20logo.png" alt="">
-        </div>
+            <img src="Assets/Images/Looola%20logo.png" alt="Site Logo" title="Looola Logo">
+        </div> 
         
         <div class="searchContainer">
            <form action="search.php" method="GET">

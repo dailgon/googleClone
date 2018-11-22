@@ -111,7 +111,7 @@ function getDetails($url) {
         echo "$url already exists";
     }
 	elseif(insertLink($url, $title, $description, $keywords)){
-      echo "SUCCESS on $url";
+      echo "SUCCESS on $url <br />";
   }
     else{
         echo "ERROR, failed to insert $url";
@@ -176,12 +176,10 @@ function followLinks($url) {
 	}
 
 }
-$urlArray = array (
-                "https://www.hrvatskitelekom.hr");
-foreach($urlArray as $urlElement){
 
-    $startUrl = $urlElement;
+
+
+    $startUrl = "https://dnevnik.hr/vijesti/";
     followLinks($startUrl);
-}
 
 ?>

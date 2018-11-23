@@ -71,7 +71,7 @@ class SiteResultsProvider{
     
     private function trimField($string, $characterLimit){
         $dots = strlen($string) > $characterLimit ? "..." : "";
-        return substr($string, 0, $characterLimit) . $dots;
+        return substr($string, 0, 100) . "<br />" . substr($string, 100, 100) . "<br />" . substr($string, 200, $characterLimit) . $dots;
     }
 }
 

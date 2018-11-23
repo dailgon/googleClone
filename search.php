@@ -21,6 +21,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Google Clone</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.css" />
     <link rel="stylesheet" href="Assets/CSS/style.css">
     <script src="Assets/JS/jquery.js"></script>
 </head>
@@ -147,6 +148,9 @@
         </div>
     </div>
     </div>
+    
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.2/dist/jquery.fancybox.min.js"></script>
+    <script src="Assets/JS/masonry.js"></script>
     <script src="Assets/JS/script.js"></script>
 </body>
 </html>

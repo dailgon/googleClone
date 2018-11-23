@@ -1,3 +1,12 @@
+<!--
+created by Pavao Pirsljin
+source code of the site can be found on
+
+https://github.com/pave121/googleClone
+
+-->
+
+
 <!doctype html>
 <html>
 <head>

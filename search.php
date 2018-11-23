@@ -20,6 +20,7 @@
     <meta charset="UTF-8">
     <title>Google Clone</title>
     <link rel="stylesheet" href="Assets/CSS/style.css">
+    <script src="Assets/JS/jquery.js"></script>
 </head>
 <body>
 
@@ -135,5 +136,6 @@
         </div>
     </div>
     </div>
+    <script src="Assets/JS/script.js"></script>
 </body>
 </html>
